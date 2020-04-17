@@ -10,7 +10,10 @@ import org.globsframework.model.MutableGlob;
 import org.globsframework.persistence.http.client.ClientPersistence;
 import org.globsframework.persistence.http.client.DefaultPersistenceRemoteClient;
 import org.globsframework.persistence.http.client.PersistenceRemoteClient;
+import org.globsframework.remote.rpc.impl.DefaultRpcService;
+import org.globsframework.remote.shared.AddressAccessor;
 import org.globsframework.remote.shared.ServerSharedData;
+import org.globsframework.remote.shared.SharedDataManager;
 import org.globsframework.remote.shared.impl.DefaultSharedDataManager;
 import org.junit.Assert;
 import org.junit.Test;
@@ -29,6 +32,9 @@ public class PersistenceHttpServerTest {
     public void name() throws IOException, InterruptedException {
         MutableGlob instantiate = PersistenceHttpServer.Options.TYPE.instantiate();
         ServerSharedData serverSharedData = DefaultSharedDataManager.initSharedData();
+        SharedDataManager sharedDataManager = DefaultSharedDataManager
+                .create(new AddressAccessor.FixAddressAccessor(serverSharedData.getHost(), serverSharedData.getPort()));
+        DefaultRpcService.registerRpcNamingServiceHere(sharedDataManager);
         Path rootDir = Files.createTempDirectory("rpcPersistenceTest");
         instantiate.set(PersistenceHttpServer.Options.rootDirectory, rootDir.toFile().getAbsolutePath())
                 .set(PersistenceHttpServer.Options.host, serverSharedData.getHost())

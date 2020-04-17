@@ -47,7 +47,6 @@ public class PersistenceHttpServer {
         peerToPeer = new DirectPeerToPeer();
         sharedDataManager = DefaultSharedDataManager.create(AddressAccessor.FixAddressAccessor
                 .create(option.get(Options.host), option.get(Options.port)));
-        DefaultRpcService.registerRpcNamingServiceHere(sharedDataManager);
         rpcService = new DefaultRpcService("worker", new DirectoryProvider() {
             public Directory getDirectory() {
                 return directory;

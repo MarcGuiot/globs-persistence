@@ -182,11 +182,13 @@ public class DefaultPersistenceRemoteClient implements PersistenceRemoteClient {
             return gson.fromJson(dataAsJson, Glob.class);
         }
 
+        // il faut gérer le cas du redemmarage coté server ==> refaire un register sur le nouveau serveur.
         public Listener listen(GlobType type, Constraint constraint, OnChange consumer, GlobType[] additionalWantedTags) {
             LOGGER.info("Call listen");
             sendTypes(type, additionalWantedTags);
             String constraintAsJson = gson.toJson(constraint);
-            String uuid = rpcPersistence.register(rpcListener.rpcListenerUUID, typeName, type.getName(), constraintAsJson, Arrays.stream(additionalWantedTags).map(GlobType::getName).toArray(String[]::new));
+            String uuid = rpcPersistence.register(rpcListener.rpcListenerUUID, typeName, type.getName(), constraintAsJson,
+                    Arrays.stream(additionalWantedTags).map(GlobType::getName).toArray(String[]::new));
             DataRegister dataRegister = new DataRegister(uuid, consumer, gson);
             rpcListener.add(dataRegister);
             return new Listener() {

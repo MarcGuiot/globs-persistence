@@ -1,6 +1,7 @@
 package org.globsframework.persistence;
 
 import org.globsframework.metamodel.GlobType;
+import org.globsframework.metamodel.annotations.ArgType;
 import org.globsframework.model.Glob;
 import org.globsframework.model.MutableGlob;
 import org.globsframework.sqlstreams.constraints.Constraint;
