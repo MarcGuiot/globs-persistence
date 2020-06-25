@@ -383,19 +383,27 @@ public class InMemoryPersistence implements Persistence {
         }
 
         public void visitIn(InConstraint constraint) {
-
+            String message = "Not implemented";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
 
         public void visitIsOrNotNull(NullOrNotConstraint constraint) {
-
+            String message = "Not implemented";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
 
         public void visitNotIn(NotInConstraint constraint) {
-
+            String message = "Not implemented";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
 
         public void visitContains(Field field, String value, boolean contains) {
-
+            String message = "Not implemented";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
         }
 
         private static class ValueOperandVisitor implements OperandVisitor {
