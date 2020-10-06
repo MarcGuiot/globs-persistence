@@ -54,11 +54,6 @@
       <version>3.0</version>
     </dependency>
     <dependency>
-      <groupId>org.globsframework</groupId>
-      <artifactId>globs-sql</artifactId>
-      <version>3.0</version>
-    </dependency>
-    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.8.2</version>
