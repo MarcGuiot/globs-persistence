@@ -441,9 +441,7 @@ public class GlobMemoryPersistence implements Persistence {
             public void visitFieldOperand(Field field) {
                 this.field = field;
                 Field f = tagFieldToTagInfoField.get(field);
-                this.value = data -> {
-                    return data.getValue(f);
-                };
+                this.value = data -> data.getValue(f);
             }
         }
     }
