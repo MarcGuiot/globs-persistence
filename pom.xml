@@ -7,20 +7,32 @@
   <version>3.0</version>
 
   <repositories>
-        <repository>
-            <id>gitlab-maven</id>
-            <url>${CI_API_V4_URL}/groups/12606202/-/packages/maven</url>
-        </repository>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/mathieu-chauvet/*</url>
+    </repository>
+    <repository>
+      <id>github-marc</id>
+      <url>https://maven.pkg.github.com/MarcGuiot/*</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
   </repositories>
+
   <distributionManagement>
-      <repository>
-          <id>gitlab-maven</id>
-          <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-      </repository>
-      <snapshotRepository>
-          <id>gitlab-maven</id>
-          <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-      </snapshotRepository>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <!--            <url>https://maven.pkg.github.com/${env.GITHUB_ACTOR}/globs-db</url>-->
+      <url>https://maven.pkg.github.com/${env.GITHUB_REPOSITORY}</url>
+    </repository>
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/${env.GITHUB_REPOSITORY}</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <build>
