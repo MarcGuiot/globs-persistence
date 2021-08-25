@@ -4,7 +4,7 @@
   <packaging>jar</packaging>
   <artifactId>globs-persistence</artifactId>
   <name>Generic Lightweight ObjectS persistence</name>
-  <version>3.0</version>
+  <version>3.1-SNAPSHOT</version>
 
   <repositories>
     <repository>
@@ -86,7 +86,7 @@
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-http</artifactId>
-      <version>3.0</version>
+      <version>3.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
