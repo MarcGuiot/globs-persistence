@@ -4,23 +4,35 @@
   <packaging>jar</packaging>
   <artifactId>globs-persistence</artifactId>
   <name>Generic Lightweight ObjectS persistence</name>
-  <version>3.0</version>
+  <version>3.1-SNAPSHOT</version>
 
   <repositories>
-        <repository>
-            <id>gitlab-maven</id>
-            <url>${CI_API_V4_URL}/groups/12606202/-/packages/maven</url>
-        </repository>
+    <repository>
+      <id>github</id>
+      <url>https://maven.pkg.github.com/mathieu-chauvet/*</url>
+    </repository>
+    <repository>
+      <id>github-marc</id>
+      <url>https://maven.pkg.github.com/MarcGuiot/*</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <url>https://repo1.maven.org/maven2</url>
+    </repository>
   </repositories>
+
   <distributionManagement>
-      <repository>
-          <id>gitlab-maven</id>
-          <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-      </repository>
-      <snapshotRepository>
-          <id>gitlab-maven</id>
-          <url>${CI_API_V4_URL}/projects/${env.CI_PROJECT_ID}/packages/maven</url>
-      </snapshotRepository>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <!--            <url>https://maven.pkg.github.com/${env.GITHUB_ACTOR}/globs-db</url>-->
+      <url>https://maven.pkg.github.com/${env.GITHUB_REPOSITORY}</url>
+    </repository>
+    <snapshotRepository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/${env.GITHUB_REPOSITORY}</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <build>
@@ -54,7 +66,7 @@
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs</artifactId>
-      <version>3.0</version>
+      <version>3.0-RELEASE</version>
     </dependency>
     <dependency>
       <groupId>org.globsframework</groupId>
@@ -74,7 +86,7 @@
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-http</artifactId>
-      <version>3.0</version>
+      <version>3.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -107,44 +119,6 @@
       <version>3.0</version>
       <scope>compile</scope>
     </dependency>
-
-    <!--    <dependency>-->
-<!--      <groupId>org.ow2.asm</groupId>-->
-<!--      <artifactId>asm</artifactId>-->
-<!--      <version>6.1</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.ow2.asm</groupId>-->
-<!--      <artifactId>asm-util</artifactId>-->
-<!--      <version>6.1</version>-->
-<!--    </dependency>-->
-    <!--<dependency>-->
-      <!--<groupId>asm</groupId>-->
-      <!--<artifactId>asm-attrs</artifactId>-->
-      <!--<version>1.5.3</version>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>asm</groupId>-->
-      <!--<artifactId>asm-util</artifactId>-->
-      <!--<version>1.5.3</version>-->
-      <!--<scope>runtime</scope>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>asm</groupId>-->
-      <!--<artifactId>asm-analysis</artifactId>-->
-      <!--<version>1.5.3</version>-->
-      <!--<scope>runtime</scope>-->
-    <!--</dependency>-->
-
-    <!--<dependency>-->
-      <!--<groupId>asm</groupId>-->
-      <!--<artifactId>asm-tree</artifactId>-->
-      <!--<version>1.5.3</version>-->
-      <!--<scope>runtime</scope>-->
-    <!--</dependency>-->
-
   </dependencies>
 
 </project>
