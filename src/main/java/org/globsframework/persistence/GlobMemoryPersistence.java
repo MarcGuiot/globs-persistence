@@ -204,16 +204,17 @@ public class GlobMemoryPersistence implements Persistence {
         }
 
         public void visitEqual(EqualConstraint constraint) {
-            DataAccess leftAccess = constraint.getLeftOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField)).value;
+            ValueOperandVisitor valueOperandVisitor = constraint.getLeftOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField));
+            DataAccess leftAccess = valueOperandVisitor.value;
             DataAccess rightAccess = constraint.getRightOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField)).value;
-            filter = data -> Objects.equals(leftAccess.getData(data), rightAccess.getData(data));
+            filter = data -> valueOperandVisitor.field.valueEqual(leftAccess.getData(data), rightAccess.getData(data));
         }
 
         public void visitNotEqual(NotEqualConstraint constraint) {
-            DataAccess leftAccess = constraint.getLeftOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField)).value;
+            ValueOperandVisitor valueOperandVisitor = constraint.getLeftOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField));
+            DataAccess leftAccess = valueOperandVisitor.value;
             DataAccess rightAccess = constraint.getRightOperand().visitOperand(new ValueOperandVisitor(tagFieldToTagInfoField)).value;
-            filter = data -> !Objects.equals(leftAccess.getData(data), rightAccess.getData(data));
-
+            filter = data -> !valueOperandVisitor.field.valueEqual(leftAccess.getData(data), rightAccess.getData(data));
         }
 
         public void visitAnd(AndConstraint constraint) {
