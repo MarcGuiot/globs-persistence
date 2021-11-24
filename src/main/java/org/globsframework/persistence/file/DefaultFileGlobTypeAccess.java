@@ -5,6 +5,10 @@ import org.globsframework.json.GlobsGson;
 import org.globsframework.json.helper.LoadingGlobTypeResolver;
 import org.globsframework.metamodel.Annotations;
 import org.globsframework.metamodel.GlobType;
+import org.globsframework.metamodel.fields.GlobArrayField;
+import org.globsframework.metamodel.fields.GlobArrayUnionField;
+import org.globsframework.metamodel.fields.GlobField;
+import org.globsframework.metamodel.fields.GlobUnionField;
 import org.globsframework.model.Glob;
 import org.globsframework.persistence.FileGlobTypeAccess;
 import org.slf4j.Logger;
@@ -17,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.Annotation;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFileGlobTypeAccess.class);
@@ -50,6 +55,12 @@ public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
 
             globType.streamAnnotations().map(Glob::getType).forEach(this::declare);
             globType.streamFields().flatMap(Annotations::streamAnnotations).map(Glob::getType).forEach(this::declare);
+            globType.streamFields().flatMap(field -> field instanceof GlobField ? Stream.of(((GlobField) field).getTargetType()) :
+                    field instanceof GlobUnionField ? ((GlobUnionField) field).getTargetTypes().stream() :
+                            field instanceof GlobArrayField ? Stream.of(((GlobArrayField) field).getTargetType()) :
+                                    field instanceof GlobArrayUnionField ? ((GlobArrayUnionField) field).getTargetTypes().stream() :
+                                            Stream.empty()
+            ).forEach(this::declare);
 
         } catch (IOException e) {
             String s = "fail to wirte globType " + globType.getName();
