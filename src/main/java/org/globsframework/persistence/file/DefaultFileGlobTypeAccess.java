@@ -1,6 +1,7 @@
 package org.globsframework.persistence.file;
 
 import com.google.gson.Gson;
+import org.globsframework.json.GlobTypeResolver;
 import org.globsframework.json.GlobsGson;
 import org.globsframework.json.helper.LoadingGlobTypeResolver;
 import org.globsframework.metamodel.Annotations;
@@ -19,26 +20,29 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.Annotation;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultFileGlobTypeAccess.class);
     private final Path dir;
     private final Map<String, GlobType> schema = new HashMap<>();
+    private GlobTypeResolver globTypeResolver;
 
-    public DefaultFileGlobTypeAccess(Path dir) {
+    public DefaultFileGlobTypeAccess(GlobTypeResolver globTypeResolver, Path dir) {
+        this.globTypeResolver = globTypeResolver;
         this.dir = dir;
         load();
     }
 
     public GlobType find(String name) {
-        return schema.get(name);
+        GlobType globType = schema.get(name);
+        return globType != null ? globType : globTypeResolver.find(name);
     }
 
     public void declare(GlobType globType) {
-        if (schema.containsKey(globType.getName())) {
+        if (globTypeResolver.find(globType.getName()) != null || schema.containsKey(globType.getName())) {
             return;
         }
         File file = new File(dir.toFile(), globType.getName() + ".json");
@@ -74,7 +78,8 @@ public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
 
     private void load() {
         try {
-            LoadingGlobTypeResolver.Builder builder = LoadingGlobTypeResolver.builder(schema::get); // return null is not found
+            LoadingGlobTypeResolver.Builder builder =
+                    LoadingGlobTypeResolver.builder(GlobTypeResolver.chain(globTypeResolver::find, schema::get)::find);
             DirectoryStream<Path> stream = Files.newDirectoryStream(dir);
             stream.forEach(path -> {
                 try {

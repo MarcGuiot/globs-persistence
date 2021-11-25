@@ -65,7 +65,7 @@ public class PersistenceProviderImpl implements PersistenceProvider {
             createDir(tagsDir);
             File dataDir = new File(directory, "data");
             createDir(dataDir);
-            DefaultFileGlobTypeAccess fileGlobTypeAccess = new DefaultFileGlobTypeAccess(schemaDir.toPath());
+            DefaultFileGlobTypeAccess fileGlobTypeAccess = new DefaultFileGlobTypeAccess(AllAnnotations.MODEL::findType, schemaDir.toPath());
             GsonBuilder builder = GlobsGson.createBuilder(name -> {
                 GlobType type1 = fileGlobTypeAccess.find(name);
                 if (type1 != null) {

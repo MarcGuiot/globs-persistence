@@ -3,6 +3,7 @@ package org.globsframework.persistence.file;
 import junit.framework.Assert;
 import org.globsframework.metamodel.GlobType;
 import org.globsframework.metamodel.GlobTypeLoaderFactory;
+import org.globsframework.metamodel.annotations.AllAnnotations;
 import org.globsframework.metamodel.annotations.Target;
 import org.globsframework.metamodel.fields.GlobField;
 import org.globsframework.metamodel.fields.StringField;
@@ -22,14 +23,14 @@ public class DefaultFileGlobTypeAccessTest {
         System.out.println("DefaultFileGlobTypeAccessTest.name: creating dir " + tempFile.toString());
 
         {
-            FileGlobTypeAccess typeAccess = new DefaultFileGlobTypeAccess(tempFile);
+            FileGlobTypeAccess typeAccess = new DefaultFileGlobTypeAccess(AllAnnotations.MODEL::findType, tempFile);
             typeAccess.declare(PersistenceTest.OwnerTagInfo.TYPE);
             typeAccess.declare(PersistenceTest.PriceRuleTagInfo.TYPE);
             typeAccess.declare(Type1.TYPE);
             Assert.assertNotNull(typeAccess.find(PersistenceTest.OwnerTagInfo.TYPE.getName()));
         }
         {
-            FileGlobTypeAccess typeAccess = new DefaultFileGlobTypeAccess(tempFile);
+            FileGlobTypeAccess typeAccess = new DefaultFileGlobTypeAccess(AllAnnotations.MODEL::findType, tempFile);
             Assert.assertNotNull(typeAccess.find(PersistenceTest.OwnerTagInfo.TYPE.getName()));
             Assert.assertNotNull(typeAccess.find(PersistenceTest.PriceRuleTagInfo.TYPE.getName()));
             Assert.assertNotNull(typeAccess.find(Type1.TYPE.getName()));
