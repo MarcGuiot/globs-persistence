@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.globsframework.directory.DefaultDirectory;
 import org.globsframework.directory.Directory;
-import org.globsframework.json.GlobTypeResolver;
+import org.globsframework.metamodel.GlobTypeResolver;
 import org.globsframework.json.GlobsGson;
 import org.globsframework.metamodel.Field;
 import org.globsframework.metamodel.GlobType;
@@ -87,8 +87,8 @@ public class DefaultPersistenceRemoteClient implements PersistenceRemoteClient {
             this.typeResolver = typeResolver;
             this.rpcListener = rpcListener;
             GsonBuilder builder = GlobsGson.createBuilder(new GlobTypeResolver() {
-                public GlobType find(String name) {
-                    GlobType type = typeResolver.find(name);
+                public GlobType findType(String name) {
+                    GlobType type = typeResolver.findType(name);
                     return type != null ? type : alreadySent.get(name);
                 }
             }, true);

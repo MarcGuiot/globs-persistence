@@ -1,8 +1,7 @@
 package org.globsframework.persistence.http.client;
 
-import org.globsframework.json.GlobTypeResolver;
+import org.globsframework.metamodel.GlobTypeResolver;
 import org.globsframework.metamodel.GlobType;
-import org.globsframework.persistence.Persistence;
 
 public interface PersistenceRemoteClient {
 

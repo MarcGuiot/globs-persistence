@@ -4,7 +4,7 @@
   <packaging>jar</packaging>
   <artifactId>globs-persistence</artifactId>
   <name>Generic Lightweight ObjectS persistence</name>
-  <version>3.2-SNAPSHOT</version>
+  <version>3.3-SNAPSHOT</version>
 
   <repositories>
     <repository>
@@ -66,27 +66,27 @@
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-gson</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-generate</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-sql</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-http</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -116,7 +116,7 @@
     <dependency>
       <groupId>org.globsframework</groupId>
       <artifactId>globs-commandline</artifactId>
-      <version>3.2-SNAPSHOT</version>
+      <version>3.3-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

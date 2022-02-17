@@ -4,7 +4,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import org.globsframework.json.GSonUtils;
 import org.globsframework.json.GlobGSonDeserializer;
-import org.globsframework.json.GlobTypeResolver;
+import org.globsframework.metamodel.GlobTypeResolver;
 import org.globsframework.model.Glob;
 import org.globsframework.persistence.RWTagAccess;
 import org.slf4j.Logger;

@@ -1,7 +1,7 @@
 package org.globsframework.persistence.file;
 
 import com.google.gson.Gson;
-import org.globsframework.json.GlobTypeResolver;
+import org.globsframework.metamodel.GlobTypeResolver;
 import org.globsframework.json.GlobsGson;
 import org.globsframework.json.helper.LoadingGlobTypeResolver;
 import org.globsframework.metamodel.Annotations;
@@ -38,11 +38,11 @@ public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
 
     public GlobType find(String name) {
         GlobType globType = schema.get(name);
-        return globType != null ? globType : globTypeResolver.find(name);
+        return globType != null ? globType : globTypeResolver.findType(name);
     }
 
     public void declare(GlobType globType) {
-        if (globTypeResolver.find(globType.getName()) != null || schema.containsKey(globType.getName())) {
+        if (globTypeResolver.findType(globType.getName()) != null || schema.containsKey(globType.getName())) {
             return;
         }
         File file = new File(dir.toFile(), globType.getName() + ".json");
@@ -79,7 +79,7 @@ public class DefaultFileGlobTypeAccess implements FileGlobTypeAccess {
     private void load() {
         try {
             LoadingGlobTypeResolver.Builder builder =
-                    LoadingGlobTypeResolver.builder(GlobTypeResolver.chain(globTypeResolver::find, schema::get)::find);
+                    LoadingGlobTypeResolver.builder(GlobTypeResolver.chain(globTypeResolver::findType, schema::get)::findType);
             DirectoryStream<Path> stream = Files.newDirectoryStream(dir);
             stream.forEach(path -> {
                 try {
