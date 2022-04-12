@@ -16,6 +16,7 @@ import org.globsframework.remote.shared.ServerSharedData;
 import org.globsframework.remote.shared.SharedDataManager;
 import org.globsframework.remote.shared.impl.DefaultSharedDataManager;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class PersistenceHttpServerTest {
 
     @Test
+    @Ignore
     public void name() throws IOException, InterruptedException {
         MutableGlob instantiate = PersistenceHttpServer.Options.TYPE.instantiate();
         ServerSharedData serverSharedData = DefaultSharedDataManager.initSharedData();

@@ -17,6 +17,7 @@ import org.globsframework.sqlstreams.constraints.Constraints;
 import org.globsframework.utils.NanoChrono;
 import org.globsframework.utils.collections.Pair;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class PersistenceTest {
     //
 
     @Test
+    @Ignore
     public void name() throws InterruptedException {
         Persistence persistence = new InMemoryPersistence(new InMemoryRWDataAccess(), new NullRWTagAccess());
 
@@ -92,6 +94,7 @@ public class PersistenceTest {
 
 
     @Test
+    @Ignore
     public void bench() {
         Persistence persistence = new GlobMemoryPersistence(new InMemoryRWDataAccess(), new NullRWTagAccess());
 //        Persistence persistence = new InMemoryPersistence(new InMemoryRWDataAccess(), new NullRWTagAccess());
