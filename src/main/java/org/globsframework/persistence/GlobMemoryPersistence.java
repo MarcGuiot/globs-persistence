@@ -416,7 +416,7 @@ public class GlobMemoryPersistence implements Persistence {
 
         }
 
-        public void visitContains(Field field, String value, boolean contains, boolean startWith) {
+        public void visitContains(Field field, String value, boolean contains, boolean startWith, boolean ignoreCase) {
 
         }
 

@@ -400,7 +400,7 @@ public class InMemoryPersistence implements Persistence {
             throw new RuntimeException(message);
         }
 
-        public void visitContains(Field field, String value, boolean contains, boolean startWith) {
+        public void visitContains(Field field, String value, boolean contains, boolean startWith, boolean ignoreCase) {
             String message = "Not implemented";
             LOGGER.error(message);
             throw new RuntimeException(message);
