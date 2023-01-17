@@ -406,6 +406,12 @@ public class InMemoryPersistence implements Persistence {
             throw new RuntimeException(message);
         }
 
+        public void visitRegularExpression(Field field, String value, boolean caseInsensitive, boolean not) {
+            String message = "Not implemented";
+            LOGGER.error(message);
+            throw new RuntimeException(message);
+        }
+
         private static class ValueOperandVisitor implements OperandVisitor {
             DataAccess value;
             Field field;

@@ -404,6 +404,10 @@ public class GlobMemoryPersistence implements Persistence {
 
         }
 
+
+        public void visitRegularExpression(Field field, String value, boolean caseInsensitive, boolean not) {
+        }
+
         public void visitIn(InConstraint constraint) {
 
         }
