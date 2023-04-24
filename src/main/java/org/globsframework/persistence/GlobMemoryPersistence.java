@@ -218,15 +218,35 @@ public class GlobMemoryPersistence implements Persistence {
         }
 
         public void visitAnd(AndConstraint constraint) {
-            Filter leftFilter = constraint.getLeftConstraint().visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
-            Filter rightFilter = constraint.getRightConstraint().visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
-            filter = data -> leftFilter.isEligible(data) && rightFilter.isEligible(data);
+            final Constraint[] constraints = constraint.getConstraints();
+            Filter[] filters = new Filter[constraints.length];
+            for (int i = 0; i < constraints.length; i++) {
+                filters[i] = constraints[i].visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
+            }
+            if (filters.length == 2) {
+                final Filter filter1 = filters[0];
+                final Filter filter2 = filters[1];
+                filter = data -> filter1.isEligible(data) && filter2.isEligible(data);
+            }
+            else {
+                filter = data -> Arrays.stream(filters).allMatch(f -> f.isEligible(data));
+            }
         }
 
         public void visitOr(OrConstraint constraint) {
-            Filter leftFilter = constraint.getLeftConstraint().visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
-            Filter rightFilter = constraint.getRightConstraint().visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
-            filter = data -> leftFilter.isEligible(data) || rightFilter.isEligible(data);
+            final Constraint[] constraints = constraint.getConstraints();
+            Filter[] filters = new Filter[constraints.length];
+            for (int i = 0; i < constraints.length; i++) {
+                filters[i] = constraints[i].visit(new FilterConstraintVisitor(tagFieldToTagInfoField)).filter;
+            }
+            if (filters.length == 2) {
+                final Filter filter1 = filters[0];
+                final Filter filter2 = filters[1];
+                filter = data -> filter1.isEligible(data) || filter2.isEligible(data);
+            }
+            else {
+                filter = data -> Arrays.stream(filters).anyMatch(f -> f.isEligible(data));
+            }
         }
 
         public void visitLessThan(LessThanConstraint constraint) {
